@@ -1,0 +1,19 @@
+Source: letsencrypt
+Section: main
+Priority: optional
+Maintainer: Letsencrypt User <foo@example.org>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Homepage: [none]
+#Vcs-Git: git://anonscm.debian.org/collab-maint/letsencrypt.git
+#Vcs-Browser: http://anonscm.debian.org/?p=collab-maint/letsencrypt.git;a=summary
+
+Package: letsencrypt-
+Architecture: all
+Depends: ${misc:Depends}, bash, grep, coreutils, curl, openssl, openssh-client
+Description: automate generation and renewal of letsencrypt certificates
+ This package enables the unattended generation of ssl-certificates
+ from letsencrypt.org via the dns-01 challenge and is thus usable also
+ for hosts, that are not reachable from the internet. You need ssh-acces 
+ to the authorative DNS server for the domains you want to obtain certificates
+ for.

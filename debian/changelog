@@ -1,0 +1,11 @@
+letsencrypt (1.1-1) unstable; urgency=medium
+
+  * update letsencrypt.sh to bulk changes
+
+ -- Martin Mueller <mm@c-base.org>  Sun, 07 Feb 2016 00:01:08 +0100
+
+letsencrypt (1.0-1) unstable; urgency=low
+
+  * Initial release
+
+ -- Martin Mueller <mm@c-base.org>  Fri, 05 Feb 2016 12:16:21 +0100

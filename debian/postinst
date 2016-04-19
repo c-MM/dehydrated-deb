@@ -1,0 +1,82 @@
+#! /bin/sh
+
+set -e
+
+isDigit() {
+	test -n "$1" || return 1
+	string="$1"
+	while [ "${string#[[:digit:]]}" != "$string" ]; do
+		string="${string#[[:digit:]]}"
+	done
+	[ -z "$string" ] || return 1
+}
+
+case "$1" in
+    configure)
+
+    	. /usr/share/debconf/confmodule
+
+	. /etc/letsencrypt/config.local.sh
+
+	if [ ! -d /etc/letsencrypt/ ] ; then
+		mkdir /etc/letsencrypt
+	fi
+
+	tmpfile="$( mktemp -t letsencrypt.conf.XXXXXXXXXX )"
+	chmod 0644 "$tmpfile"
+
+	cat <<EOF > "$tmpfile"
+$(hostname -f)
+EOF
+
+	[ -r /etc/letsencrypt/domains.txt ] || ucf --debconf-ok --three-way "$tmpfile" /etc/letsencrypt/domains.txt
+	rm -f "$tmpfile"
+
+	# read time from cron.d job, if any
+	if [ -f /etc/cron.d/letsencrypt ] ; then
+
+		min=$( grep -v '^[[:space:]]*\(\#\|$\)' /etc/cron.d/letsencrypt \
+			2>/dev/null | {
+			read min null
+			isDigit "$min" && echo "$min"
+			} ) || true
+
+	fi
+
+	# get random time if cron.d snippet doesn't exist or is malformed
+	if ! isDigit "$min" ; then
+		min=$(( $( od -vAn -N2 -tu4 < /dev/urandom ) % 60 ))
+	fi
+
+	tmpfile="$( mktemp -t letsencrypt.crond.XXXXXXXXXX )"
+	chmod 0644 "$tmpfile"
+
+	cat <<EOF >"$tmpfile"
+# cron entry for letsencrypt
+
+$min * * * * root if test -x /etc/letsencrypt/cron.sh; then /etc/letsencrypt/cron.sh; else true; fi
+EOF
+	ucf --debconf-ok --three-way "$tmpfile" /etc/cron.d/letsencrypt
+	rm -f "$tmpfile"
+
+	if [ ! -r /etc/letsencrypt/ns-update-ssh ] ; then
+		rm -f /etc/letsencrypt/ns-update-ssh /etc/letsencrypt/ns-update-ssh.pub
+		true | DISPLAY="" ssh-keygen -f /etc/letsencrypt/ns-update-ssh >/dev/null 2>&1
+		(echo "New ssh-key for letsencrypt certificates\n\n" ; cat /etc/letsencrypt/ns-update-ssh.pub ) \
+		| mail -s "letsencrypt ssh-key for $(hostname -f)" "$CONTACT_EMAIL"
+	fi
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0
