@@ -1,10 +1,16 @@
-letsencrypt (1.1-1) unstable; urgency=medium
+letsencrypt (1.0.0-3) UNRELEASED; urgency=medium
+
+  * add git repo an README.md
+
+ -- Martin Mueller <mm@ovid.sig21.net>  Wed, 20 Apr 2016 18:48:53 +0200
+
+letsencrypt (1.0.0-2) unstable; urgency=medium
 
   * update letsencrypt.sh to bulk changes
 
  -- Martin Mueller <mm@c-base.org>  Sun, 07 Feb 2016 00:01:08 +0100
 
-letsencrypt (1.0-1) unstable; urgency=low
+letsencrypt (1.0.0-1) unstable; urgency=low
 
   * Initial release
 
