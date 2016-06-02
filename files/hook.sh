@@ -67,4 +67,8 @@ function deploy_cert {
     /etc/letsencrypt/install-cert.sh "${DOMAIN}" "${KEYFILE}" "${CERTFILE}" "${CHAINFILE}"
 }
 
+function unchanged_cert {
+    true
+}
+
 HANDLER=$1; shift; $HANDLER $@

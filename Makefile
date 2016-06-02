@@ -18,7 +18,7 @@ all : $(TARGET) tmp/config.local.sh tmp/config.sh
 
 $(TARGET) :
 	@git clone https://github.com/lukas2511/letsencrypt.sh.git
-	@( cd $(TARGET) ; git checkout -- $(REVISION) )
+	@( cd $(TARGET) ; git checkout $(REVISION) )
 
 tmp/config.sh :
 	@mkdir -p tmp
