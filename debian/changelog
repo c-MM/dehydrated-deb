@@ -1,3 +1,9 @@
+letsencrypt (1.2.1-0) unstable; urgency=medium
+
+  * fix git checkout
+
+ -- Martin Mueller <mm@ovid.sig21.net>  Thu, 02 Jun 2016 21:29:22 +0200
+
 letsencrypt (1.2.0-4) unstable; urgency=medium
 
   * add git repo an README.md
