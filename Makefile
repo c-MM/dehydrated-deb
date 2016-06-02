@@ -14,11 +14,10 @@ DOC_DIR=$(DESTDIR)/usr/share/doc/letsencrypt
 
 REVISION = v0.2.0
 
-all : $(TARGET) tmp/config.local.sh tmp/config.sh
+all : update tmp/config.local.sh tmp/config.sh
 
 $(TARGET) :
 	@git clone https://github.com/lukas2511/letsencrypt.sh.git
-	@( cd $(TARGET) ; git checkout $(REVISION) )
 
 tmp/config.sh :
 	@mkdir -p tmp
@@ -50,13 +49,13 @@ endif
 	@echo 'HOOK_CHAIN="yes"' >> tmp/config.local.sh
 
 update : $(TARGET)
-	@( cd $(TARGET) ; git pull ; git checkout $(REVISION) )
+	@( cd $(TARGET) ; git fetch; git checkout $(REVISION) )
 
 clean:
 	rm -rf tmp/config.local.sh tmp/config.sh
 	rmdir tmp || true
 
-install: $(TARGET)
+install: update
 	$(INSTALL) -d $(ETC_DIR)
 	$(INSTALL) -t $(ETC_DIR) tmp/config.sh tmp/config.local.sh files/hook.sh files/cron.sh files/install-cert.sh letsencrypt.sh/letsencrypt.sh
 	$(CHMOD) a+x $(ETC_DIR)/*.sh

@@ -1,15 +1,17 @@
-letsencrypt (1.2.1-0) unstable; urgency=medium
+letsencrypt (1.2.2-0) unstable; urgency=medium
 
   * fix git checkout
+  * update Makefile
+  * update hook.sh
 
- -- Martin Mueller <mm@ovid.sig21.net>  Thu, 02 Jun 2016 21:29:22 +0200
+ -- Martin Mueller <mm@ovid.sig21.net>  Thu, 02 Jun 2016 21:55:15 +0200
 
 letsencrypt (1.2.0-4) unstable; urgency=medium
 
   * add git repo an README.md
   * update to v0.2.0 of letsencrypt.sh
 
- -- Martin Mueller <mm@ovid.sig21.net>  Thu, 02 Jun 2016 20:50:38 +0200
+ -- Martin Mueller <mm@c-base.org>  Thu, 02 Jun 2016 20:50:38 +0200
 
 letsencrypt (1.0.0-2) unstable; urgency=medium
 
