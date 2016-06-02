@@ -12,8 +12,7 @@ ETC_DIR=$(DESTDIR)/etc/letsencrypt
 VAR_DIR=$(DESTDIR)/var/lib/letsencrypt/
 DOC_DIR=$(DESTDIR)/usr/share/doc/letsencrypt
 
-REVISION = 21c18dd3b8c2572b894d9ec2e5c3fc2589f56f32
-
+REVISION = v0.2.0
 
 all : $(TARGET) tmp/config.local.sh tmp/config.sh
 
@@ -23,7 +22,7 @@ $(TARGET) :
 
 tmp/config.sh :
 	@mkdir -p tmp
-	@$(COPY) letsencrypt.sh/config.sh.example tmp/config.sh
+	@$(COPY) letsencrypt.sh/docs/examples/config.sh.example tmp/config.sh
 	@echo "" >> tmp/config.sh
 	@echo ". /etc/letsencrypt/config.local.sh" >> tmp/config.sh
 	@echo "" >> tmp/config.sh
