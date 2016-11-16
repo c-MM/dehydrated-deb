@@ -1,23 +1,23 @@
 #!/bin/bash
 
-[ -d /etc/letsencrypt/certs ] || exit 0
+[ -d /etc/dehydrated/certs ] || exit 0
 
-. /etc/letsencrypt/config.sh
+. /etc/dehydrated/config
 
-if [ -r /var/lib/letsencrypt/cron_run ] ; then
-	find /var/lib/letsencrypt/ -maxdepth 1 -name cron_run -mmin +$((60 * 24 * 4 - 1)) \
+if [ -r /var/lib/dehydrated/cron_run ] ; then
+	find /var/lib/dehydrated/ -maxdepth 1 -name cron_run -mmin +$((60 * 24 * 4 - 1)) \
 	| grep -q cron_run || exit 0
 fi
 
-touch /var/lib/letsencrypt/cron_run
+touch /var/lib/dehydrated/cron_run
 
-tmpfile="$( mktemp -t letsencrypt.out.XXXXXXXXXX )"
+tmpfile="$( mktemp -t dehydrated.out.XXXXXXXXXX )"
 
 exec >"$tmpfile" 2>&1 < /dev/null
 
-/etc/letsencrypt/letsencrypt.sh -c
+/etc/dehydrated/dehydrated -c
 
 if [ $? -ne 0 ] ; then
-	cat "$tmpfile" | mail -s "letsencrypt failed on $(hostname -f)" $CONTACT_EMAIL
+	cat "$tmpfile" | mail -s "dehydrated failed on $(hostname -f)" $CONTACT_EMAIL
 fi
 rm -f "$tmpfile"

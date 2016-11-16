@@ -16,26 +16,34 @@ case "$1" in
 
     	. /usr/share/debconf/confmodule
 
-	. /etc/letsencrypt/config.local.sh
+	. /etc/dehydrated/config.local
 
-	if [ ! -d /etc/letsencrypt/ ] ; then
-		mkdir /etc/letsencrypt
+	if [ ! -d /etc/dehydrated/ ] ; then
+		mkdir /etc/dehydrated
 	fi
 
-	tmpfile="$( mktemp -t letsencrypt.conf.XXXXXXXXXX )"
+	tmpfile="$( mktemp -t dehydrated.conf.XXXXXXXXXX )"
 	chmod 0644 "$tmpfile"
 
 	cat <<EOF > "$tmpfile"
 $(hostname -f)
 EOF
 
-	[ -r /etc/letsencrypt/domains.txt ] || ucf --debconf-ok --three-way "$tmpfile" /etc/letsencrypt/domains.txt
+	[ -r /etc/letsencrypt/domains.txt ] && cp -a /etc/letsencrypt/domains.txt /etc/dehydrated/
+	[ -r /etc/letsencrypt/private_key.pem ] && cp -a /etc/letsencrypt/private_key.pem /etc/dehydrated/
+	[ -d /etc/letsencrypt/certs ] && cp -ar /etc/letsencrypt/certs /etc/dehydrated/
+	if [ -r /etc/letsencrypt/ns-update-ssh -a -r /etc/letsencrypt/ns-update-ssh.pub ] ; then
+		cp -a /etc/letsencrypt/ns-update-ssh /etc/letsencrypt/ns-update-ssh.pub /etc/dehydrated/
+	fi
+
+	[ -r /etc/dehydrated/domains.txt ] || ucf --debconf-ok --three-way "$tmpfile" /etc/dehydrated/domains.txt
+
 	rm -f "$tmpfile"
 
 	# read time from cron.d job, if any
-	if [ -f /etc/cron.d/letsencrypt ] ; then
+	if [ -f /etc/cron.d/dehydrated ] ; then
 
-		min=$( grep -v '^[[:space:]]*\(\#\|$\)' /etc/cron.d/letsencrypt \
+		min=$( grep -v '^[[:space:]]*\(\#\|$\)' /etc/cron.d/dehydrated \
 			2>/dev/null | {
 			read min null
 			isDigit "$min" && echo "$min"
@@ -48,21 +56,21 @@ EOF
 		min=$(( $( od -vAn -N2 -tu4 < /dev/urandom ) % 60 ))
 	fi
 
-	tmpfile="$( mktemp -t letsencrypt.crond.XXXXXXXXXX )"
+	tmpfile="$( mktemp -t dehydrated.crond.XXXXXXXXXX )"
 	chmod 0644 "$tmpfile"
 
 	cat <<EOF >"$tmpfile"
-# cron entry for letsencrypt
+# cron entry for dehydrated
 
-$min * * * * root if test -x /etc/letsencrypt/cron.sh; then /etc/letsencrypt/cron.sh; else true; fi
+$min * * * * root if test -x /etc/dehydrated/cron.sh; then /etc/dehydrated/cron.sh; else true; fi
 EOF
-	ucf --debconf-ok --three-way "$tmpfile" /etc/cron.d/letsencrypt
+	ucf --debconf-ok --three-way "$tmpfile" /etc/cron.d/dehydrated
 	rm -f "$tmpfile"
 
-	if [ ! -r /etc/letsencrypt/ns-update-ssh ] ; then
-		rm -f /etc/letsencrypt/ns-update-ssh /etc/letsencrypt/ns-update-ssh.pub
-		true | DISPLAY="" ssh-keygen -f /etc/letsencrypt/ns-update-ssh >/dev/null 2>&1
-		(echo "New ssh-key for letsencrypt certificates\n\n" ; cat /etc/letsencrypt/ns-update-ssh.pub ) \
+	if [ ! -r /etc/dehydrated/ns-update-ssh ] ; then
+		rm -f /etc/dehydrated/ns-update-ssh /etc/dehydrated/ns-update-ssh.pub
+		true | DISPLAY="" ssh-keygen -f /etc/dehydrated/ns-update-ssh >/dev/null 2>&1
+		(echo "New ssh-key for letsencrypt certificates\n\n" ; cat /etc/dehydrated/ns-update-ssh.pub ) \
 		| mail -s "letsencrypt ssh-key for $(hostname -f)" "$CONTACT_EMAIL"
 	fi
 

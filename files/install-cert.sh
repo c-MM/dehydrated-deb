@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /etc/letsencrypt/config.sh
+. /etc/dehydrated/config
 
 DOMAIN="${1}" KEYFILE="${2}" CERTFILE="${3}" CHAINFILE="${4}"
 
@@ -20,7 +20,7 @@ DOMAIN="${1}" KEYFILE="${2}" CERTFILE="${3}" CHAINFILE="${4}"
 #   The path of the file containing the full certificate chain.
 
 echo " ! Certificate installation not yet configured"
-echo " ! edit /etc/letsencrypt/install-cert.sh"
+echo " ! edit /etc/dehydrated/install-cert.sh"
 echo " ! certificates and keys are in $(dirname $CERTFILE)/"
 exit 1
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /etc/letsencrypt/config.sh
+. /etc/dehydrated/config
 
 function deploy_challenge {
     local DOMAIN="${1}" TOKEN_FILENAME="${2}" TOKEN_VALUE="${3}"
@@ -45,7 +45,7 @@ function deploy_cert {
     local DOMAIN="${1}" KEYFILE="${2}" CERTFILE="${3}" FULLCHAINFILE="${4}" CHAINFILE="${5}" TIMESTAMP="${6}"
 
     # cleanup files from failed atempts
-    for i in $(find /etc/letsencrypt/certs/ -type f -size 0 -name cert\*.pem) ; do
+    for i in $(find /etc/dehydrated/certs/ -type f -size 0 -name cert\*.pem) ; do
 	rm -f $i $(echo "$i" |  sed -e 's/pem$/csr/') $(echo "$i" | sed -e 's/\/cert-/\/privkey-/')
     done
 
@@ -68,7 +68,7 @@ function deploy_cert {
     # - TIMESTAMP
     #   Timestamp when the specified certificate was created.
 
-    /etc/letsencrypt/install-cert.sh "${DOMAIN}" "${KEYFILE}" "${CERTFILE}" "${FULLCHAINFILE}" "${CHAINFILE}" "${TIMESTAMP}"
+    /etc/dehydrated/install-cert.sh "${DOMAIN}" "${KEYFILE}" "${CERTFILE}" "${FULLCHAINFILE}" "${CHAINFILE}" "${TIMESTAMP}"
 }
 
 function unchanged_cert {

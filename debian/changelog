@@ -1,10 +1,16 @@
+dehydrated (1.3.0-0) UNRELEASED; urgency=medium
+
+  * update to upstream name change to dehydrated
+
+ -- Martin Mueller <mm@c-base.org>  Tue, 15 Nov 2016 20:24:31 +0100
+
 letsencrypt (1.2.2-0) unstable; urgency=medium
 
   * fix git checkout
   * update Makefile
   * update hook.sh
 
- -- Martin Mueller <mm@ovid.sig21.net>  Thu, 02 Jun 2016 21:55:15 +0200
+ -- Martin Mueller <mm@c-base.org>  Thu, 02 Jun 2016 21:55:15 +0200
 
 letsencrypt (1.2.0-4) unstable; urgency=medium
 

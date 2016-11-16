@@ -1,8 +1,8 @@
-# letsencrypt.sh debian packaging script
+# dehydrated debian packaging script
 Scripts and files to produce preconfigured debian packages for the let's encrypt 
-project on the basis of letsencrypt.sh
+project on the basis of dehydrated
 
-Many thanks to https://github.com/lukas2511/letsencrypt.sh which provides a
+Many thanks to https://github.com/lukas2511/dehydrated which provides a
 small lightweight bash and curl script for let's encrypt
 
 ## Usage
@@ -42,10 +42,10 @@ configuration automatically.
 ## What needs to be done after installation
  * add the key to the authorized_keys file on the DNS server for
    zone updates
- * edit the file */etc/letsencrypt/domains.txt* according to
-   /usr/share/doc/letsencrypt/README.md
- * edit the file */etc/letsencrypt/install-cert.sh* to put the certificates
+ * edit the file */etc/dehydrated/domains.txt* according to
+   /usr/share/doc/dehydrated/README.md
+ * edit the file */etc/dehydrated/install-cert.sh* to put the certificates
    to the correct locations and restart the services
- * manually run */etc/letsencrypt/letsencrypt.sh -c* after the ssh key has
+ * manually run */etc/dehydrated/dehydrated -c* after the ssh key has
    been added to the DNS server to generate the first certificate and enable
    the cronjob

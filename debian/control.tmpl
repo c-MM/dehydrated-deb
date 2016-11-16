@@ -1,15 +1,14 @@
-Source: letsencrypt
+Source: dehydrated
 Section: main
 Priority: optional
 Maintainer: Letsencrypt User <foo@example.org>
 Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.5
 Homepage: [none]
-#Vcs-Git: git://anonscm.debian.org/collab-maint/letsencrypt.git
-#Vcs-Browser: http://anonscm.debian.org/?p=collab-maint/letsencrypt.git;a=summary
 
-Package: letsencrypt-
+Package: dehydrated-
 Architecture: all
+Pre-Depends: dpkg (>= 1.17.14)
 Depends: ${misc:Depends}, bash, grep, coreutils, curl, openssl, openssh-client
 Description: automate generation and renewal of letsencrypt certificates
  This package enables the unattended generation of ssl-certificates

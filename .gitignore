@@ -1,4 +1,7 @@
 vars.sh
 config-local.sh
 letsencrypt.sh/
+dehydrated/
 debian/control
+debian/letsencrypt-*.debhelper.log
+tmp/

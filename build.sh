@@ -20,7 +20,7 @@ elif [ "$CA_URL" = "\r" ] ; then
 	[ "$VARIANT" = "example" ] && VARIANT="example-test"
 fi
 
-sed -e "s/^\(Package: letsencrypt\).*/\1-$VARIANT/" > debian/control < debian/control.tmpl
+sed -e "s/^\(Package: dehydrated\).*/\1-$VARIANT/" > debian/control < debian/control.tmpl
 
 export CONTACT SSH_USER CA_URL
 

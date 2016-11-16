@@ -3,16 +3,16 @@
 case "$1" in
     purge)
 	if which ucf >/dev/null; then
-		ucf --purge /etc/cron.d/letsencrypt
-		ucf --purge /etc/letsencrypt/domains.txt
+		ucf --purge /etc/cron.d/dehydrated
+		ucf --purge /etc/dehydrated/domains.txt
 	fi
-	rm -f /etc/cron.d/letsencrypt /etc/cron.d/letsencrypt.ucf-*
-	rm -f /var/lib/misc/letsencrypt.cron
-	rm -f /etc/letsencrypt/letsencrypt.conf*
-	if [ -d /etc/letsencrypt ] ; then
-		rmdir /etc/letsencrypt || true
+	rm -f /etc/cron.d/dehydrated /etc/cron.d/dehydrated.ucf-*
+	rm -f /var/lib/misc/dehydrated.cron
+	rm -f /etc/dehydrated/dehydrated.conf*
+	if [ -d /etc/dehydrated ] ; then
+		rmdir /etc/dehydrated || true
 	fi
-	rm -rf /var/lib/letsencrypt
+	rm -rf /var/lib/dehydrated
     ;;
 esac
 
