@@ -29,7 +29,7 @@ echo " ! certificates and keys are in $(dirname $CERTFILE)/"
 exit 1
 
 # example
-#cat "$CHAINFILE" > /etc/ssl/certs/cert.pem
+#cat "$FULLCHAINFILE" > /etc/ssl/certs/cert.pem
 #cat "$KEYFILE" > /etc/ssl/private/key.pem
 #chown root.ssl-cert /etc/ssl/private/key.pem
 #chmod 640 /etc/ssl/private/key.pem
