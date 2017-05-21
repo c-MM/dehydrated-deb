@@ -12,7 +12,7 @@ ETC_DIR=$(DESTDIR)/etc/dehydrated
 VAR_DIR=$(DESTDIR)/var/lib/dehydrated/
 DOC_DIR=$(DESTDIR)/usr/share/doc/dehydrated
 
-REVISION = v0.3.1
+REVISION = v0.4.0
 
 all : update tmp/config.local tmp/config
 
