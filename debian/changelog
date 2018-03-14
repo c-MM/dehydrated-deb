@@ -1,9 +1,19 @@
+dehydrated (1.5.0-1) UNRELEASED; urgency=medium
+
+  * update to dehydrated 0.6.1
+  * support wildcard certs
+  * add different ACCOUNTDIR and CERTDIR for testing package
+  * only copy old letsencrypt data if no dehydrated is there
+  * bump debian/compat from 7 to 9
+
+ -- Martin Mueller <mm@c-base.org>  Wed, 14 Mar 2018 14:50:09 +0100
+
 dehydrated (1.4.0-1) unstable; urgency=medium
 
   * update to dehydrated 0.4.0
   * update hook.sh
 
- -- Martin Mueller <mm@ovid.sig21.net>  Sun, 21 May 2017 17:29:44 +0200
+ -- Martin Mueller <mm@c-base.org>  Sun, 21 May 2017 17:29:44 +0200
 
 dehydrated (1.3.1-1) unstable; urgency=medium
 
