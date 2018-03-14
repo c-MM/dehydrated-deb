@@ -12,7 +12,7 @@ ETC_DIR=$(DESTDIR)/etc/dehydrated
 VAR_DIR=$(DESTDIR)/var/lib/dehydrated/
 DOC_DIR=$(DESTDIR)/usr/share/doc/dehydrated
 
-REVISION = v0.4.0
+REVISION = v0.6.1
 
 all : update tmp/config.local tmp/config
 
@@ -48,6 +48,12 @@ endif
 	@echo 'CHALLENGETYPE="dns-01"' >> tmp/config.local
 	@echo 'HOOK="$${BASEDIR}/hook.sh"' >> tmp/config.local
 	@echo 'HOOK_CHAIN="yes"' >> tmp/config.local
+ifneq ($(origin CERTDIR), undefined)
+	@echo 'CERTDIR="$(CERTDIR)"' >> tmp/config.local
+endif
+ifneq ($(origin ACCOUNTDIR), undefined)
+	@echo 'ACCOUNTDIR="$(ACCOUNTDIR)"' >> tmp/config.local
+endif
 
 update : $(TARGET)
 	@( cd $(TARGET) ; git fetch; git checkout $(REVISION) )
