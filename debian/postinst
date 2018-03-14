@@ -29,11 +29,14 @@ case "$1" in
 $(hostname -f)
 EOF
 
-	[ -r /etc/letsencrypt/domains.txt ] && cp -a /etc/letsencrypt/domains.txt /etc/dehydrated/
-	[ -r /etc/letsencrypt/private_key.pem ] && cp -a /etc/letsencrypt/private_key.pem /etc/dehydrated/
-	[ -d /etc/letsencrypt/certs ] && cp -ar /etc/letsencrypt/certs /etc/dehydrated/
-	if [ -r /etc/letsencrypt/ns-update-ssh -a -r /etc/letsencrypt/ns-update-ssh.pub ] ; then
-		cp -a /etc/letsencrypt/ns-update-ssh /etc/letsencrypt/ns-update-ssh.pub /etc/dehydrated/
+	[ ! -r /etc/dehydrated/domains.txt -a -r /etc/letsencrypt/domains.txt ] && cp -a /etc/letsencrypt/domains.txt /etc/dehydrated/
+	[ ! -r /etc/dehydrated/private_key.pem -a -r /etc/letsencrypt/private_key.pem ] && cp -a /etc/letsencrypt/private_key.pem /etc/dehydrated/
+	[ ! -d /etc/dehydrated/certs -a -d /etc/letsencrypt/certs ] && cp -ar /etc/letsencrypt/certs /etc/dehydrated/
+	[ ! -d /etc/dehydrated/accounts -a -d /etc/letsencrypt/accounts ] && cp -ar /etc/letsencrypt/accounts /etc/dehydrated/
+	if [ ! -r /etc/dehydrated/ns-update-ssh -a -r /etc/dehydrated/ns-update-ssh.pub ] ; then
+		if [ -r /etc/letsencrypt/ns-update-ssh -a -r /etc/letsencrypt/ns-update-ssh.pub ] ; then
+			cp -a /etc/letsencrypt/ns-update-ssh /etc/letsencrypt/ns-update-ssh.pub /etc/dehydrated/
+		fi
 	fi
 
 	[ -r /etc/dehydrated/domains.txt ] || ucf --debconf-ok --three-way "$tmpfile" /etc/dehydrated/domains.txt
