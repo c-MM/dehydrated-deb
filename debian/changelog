@@ -1,3 +1,9 @@
+dehydrated (1.5.2-1) unstable; urgency=medium
+
+  * update to dehydrated 0.6.2
+
+ -- Martin Mueller <mm@c-base.org>  Mon, 07 May 2018 18:39:45 +0200
+
 dehydrated (1.5.1-1) unstable; urgency=medium
 
   * use specific commit with ACMEv2 chain fix
