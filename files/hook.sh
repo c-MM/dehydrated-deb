@@ -93,7 +93,7 @@ function unchanged_cert {
     true
 }
 
-invalid_challenge() {
+function invalid_challenge() {
     local DOMAIN="${1}" RESPONSE="${2}"
 
     # This hook is called if the challenge response has failed, so domain
@@ -107,7 +107,7 @@ invalid_challenge() {
     #   The response that the verification server returned
 }
 
-request_failure() {
+function request_failure() {
     local STATUSCODE="${1}" REASON="${2}" REQTYPE="${3}"
 
     # This hook is called when a HTTP request fails (e.g., when the ACME
@@ -124,7 +124,7 @@ request_failure() {
     #   The kind of request that was made (GET, POST...)
 }
 
-exit_hook() {
+function exit_hook() {
   # This hook is called at the end of a dehydrated command and can be used
   # to do some final (cleanup or other) tasks.
 
