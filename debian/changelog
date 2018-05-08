@@ -1,3 +1,9 @@
+dehydrated (1.5.3-1) unstable; urgency=medium
+
+  * depend also on package ssl-cert
+
+ -- Martin Mueller <mm@c-base.org>  Tue, 08 May 2018 22:54:34 +0200
+
 dehydrated (1.5.2-2) unstable; urgency=medium
 
   * fix hook.sh to work also with staging setup
