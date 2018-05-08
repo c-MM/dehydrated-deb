@@ -55,6 +55,9 @@ endif
 ifneq ($(origin ACCOUNTDIR), undefined)
 	@echo 'ACCOUNTDIR="$(ACCOUNTDIR)"' >> tmp/config.local
 endif
+ifneq ($(origin CHAINCACHE), undefined)
+	@echo 'CHAINCACHE="$(CHAINCACHE)"' >> tmp/config.local
+endif
 
 update : $(TARGET)
 	@( cd $(TARGET) ; git fetch; git checkout $(REVISION) )
