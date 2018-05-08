@@ -45,7 +45,7 @@ function deploy_cert {
     local DOMAIN="${1}" KEYFILE="${2}" CERTFILE="${3}" FULLCHAINFILE="${4}" CHAINFILE="${5}" TIMESTAMP="${6}"
 
     # cleanup files from failed atempts
-    for i in $(find /etc/dehydrated/certs/ -type f -size 0 -name cert\*.pem) ; do
+    for i in $(find ${CERTDIR} -type f -size 0 -name cert\*.pem) ; do
 	rm -f $i $(echo "$i" |  sed -e 's/pem$/csr/') $(echo "$i" | sed -e 's/\/cert-/\/privkey-/')
     done
 
