@@ -1,3 +1,9 @@
+dehydrated (1.5.4-1) UNRELEASED; urgency=medium
+
+  * update to dehydrated v0.6.5
+
+ -- Martin Mueller <mm@c-base.org>  Tue, 06 Aug 2019 13:34:51 +0200
+
 dehydrated (1.5.3-1) unstable; urgency=medium
 
   * depend also on package ssl-cert

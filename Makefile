@@ -13,7 +13,7 @@ VAR_DIR=$(DESTDIR)/var/lib/dehydrated/
 DOC_DIR=$(DESTDIR)/usr/share/doc/dehydrated
 
 #REVISION = 60832185013aee00914acff29a2d868e2b15507e
-REVISION = v0.6.2
+REVISION = v0.6.5
 
 all : update tmp/config.local tmp/config
 
