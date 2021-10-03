@@ -1,8 +1,14 @@
-dehydrated (1.5.4-1) UNRELEASED; urgency=medium
+dehydrated (1.5.5-1) unstable; urgency=medium
+
+  * update to dehydrated v0.7.0
+
+ -- Martin Mueller <mm@c-base.org>  Sun, 03 Oct 2021 12:40:20 +0200
+
+dehydrated (1.5.4-1) unstable; urgency=medium
 
   * update to dehydrated v0.6.5
 
- -- Martin Mueller <mm@c-base.org>  Tue, 06 Aug 2019 13:34:51 +0200
+ -- Martin Mueller <mm@c-base.org>  Sun, 06 Aug 2019 18:37:45 +0200
 
 dehydrated (1.5.3-1) unstable; urgency=medium
 
