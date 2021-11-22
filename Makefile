@@ -49,6 +49,7 @@ endif
 	@echo 'CHALLENGETYPE="dns-01"' >> tmp/config.local
 	@echo 'HOOK="$${BASEDIR}/hook.sh"' >> tmp/config.local
 	@echo 'HOOK_CHAIN="yes"' >> tmp/config.local
+	@echo 'PREFERRED_CHAIN="ISRG Root X1"' >> tmp/config.local
 ifneq ($(origin CERTDIR), undefined)
 	@echo 'CERTDIR="$(CERTDIR)"' >> tmp/config.local
 endif
